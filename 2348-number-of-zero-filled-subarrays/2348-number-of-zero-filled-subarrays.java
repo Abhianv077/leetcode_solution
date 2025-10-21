@@ -1,0 +1,24 @@
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long result = 0;
+        int n = nums.length;
+        int i = 0;
+
+        while (i < n) {
+            long zeros = 0;
+
+            if (nums[i] == 0) {
+                while (i < n && nums[i] == 0) {
+                    i++;
+                    zeros++;
+                }
+            } else {
+                i++;
+            }
+
+            result += (zeros * (zeros + 1)) / 2;
+        }
+
+        return result;
+    }
+}
