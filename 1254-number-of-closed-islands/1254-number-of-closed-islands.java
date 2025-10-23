@@ -1,16 +1,16 @@
 class Solution {
     int m, n;
 
-    private boolean dfs(int[][] grid, int r, int c) {
-        // If we go out of bounds, it's not a closed island
+    public boolean dfs(int[][] grid, int r, int c) {
+        // Out of bounds → Not closed
         if (r < 0 || r >= m || c < 0 || c >= n)
             return false;
 
-        // If it's water, it is a valid (closed) boundary
+        // Already visited or water → Closed at this path
         if (grid[r][c] == 1)
             return true;
 
-        // Mark current cell as visited (convert land -> water)
+        // Mark current cell as visited
         grid[r][c] = 1;
 
         boolean left  = dfs(grid, r, c - 1);
@@ -18,7 +18,7 @@ class Solution {
         boolean up    = dfs(grid, r - 1, c);
         boolean down  = dfs(grid, r + 1, c);
 
-        // Island is closed only if all directions are closed
+        // Island is closed only if all four sides are closed
         return left && right && up && down;
     }
 
